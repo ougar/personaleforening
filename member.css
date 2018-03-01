@@ -1,0 +1,95 @@
+/* Center main div on login and scanner page */
+#logindiv, #scandiv {
+  position: absolute;
+    left: 50%;
+    top: 30%;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+  font-size: 160%;
+}
+
+/* General setup */
+.error {
+  color: red;
+}
+
+a:visited {
+  color: black;
+}
+form {
+  display: inline;
+}
+
+.info, .error{
+  height: 50px;
+  font-size: 80%;
+  margin-top: 20px;
+}
+
+/* Login page */
+#loginform span {
+  display: inline-block;
+  width: 200px;
+}
+#loginform input {
+  width:200px;
+  font-size: 100%;
+}
+#loginform input[type=submit] {
+  width: 408px;
+}
+
+/* Scanner page */
+#scandiv input {
+  width: 500px;
+  font-size: 200%;
+  padding: 20px 20px 20px 20px;
+  /* Color transparent hides text-cursor (and text)  */
+  /* Text shadow then shows text again               */
+  color: transparent;
+  text-shadow: 0 0 0 #2196f3;
+  /* Show characters as password bullets             */
+  -webkit-text-security: disc;
+}
+#scandiv span {
+  font-size: 70%;
+  color: black;
+}
+
+#infodiv {
+  padding: 10px;
+  display: inline-block;
+}
+
+#infodiv span {
+  display: inline-block;
+  width: 100px;
+}
+
+.member {
+  border: 10px solid green;
+}
+.notmember {
+  border: 10px solid red;
+}
+
+#searchfield {
+  background-image: url('searchicon.png'); /* Add a search icon to input */
+  background-position: 10px 8px; /* Position the search icon */
+  background-repeat: no-repeat; /* Do not repeat the icon image */
+  font-size: 14px; /* Increase font-size */
+  padding: 10px 10px 10px 40px; /* Add some padding */
+  border: 1px solid #ddd; /* Add a grey border */
+  margin-bottom: 12px; /* Add some space below the input */
+}
+
+/*
+input {
+  color: transparent;
+  text-shadow: 0 0 0 #2196f3;
+
+  &:focus {
+      outline: none;
+  }
+}
+*/
