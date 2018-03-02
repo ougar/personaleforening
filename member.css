@@ -55,6 +55,7 @@ form {
   padding: 10px;
   display: inline-block;
   width: 400px;
+  font-size: 130%;
 }
 
 #infodiv span {
@@ -67,6 +68,10 @@ form {
 }
 .notmember {
   border: 10px solid red;
+}
+
+#infodiv input[type=submit] {
+  font-size: 150%;
 }
 
 #searchfield {

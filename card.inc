@@ -71,6 +71,10 @@ class Card {
     Database::get_handle()->kquery("update {$this->table} set lastscan=current_timestamp() where id={$this->id}");
   }
 
+  public function payment() {
+    Database::get_handle()->kquery("update {$this->table} set member=1, payment=current_timestamp() where id={$this->id}");
+  }
+
   public function validName() {
     return(!preg_match("/[^\p{L} æøåÆØÅ]/",$this->name));
   }

@@ -79,6 +79,7 @@ function cardinfo($card) {
         "    <span> Medlem   </span> ".($card->member?"Ja":"Nej")." <br>\n".
         "    <form action='index.php'> <input type='submit' value='OK'> </form>\n".
         "    <form action='checkmember.php' method='POST'> <input type='hidden' name='edit' value='1'><input type='hidden' name='code' value='{$card->code}'><input type='submit' value='Edit'> </form>\n".
+        ($card->member?"":"    <form action='betalt.php' method='POST'> <input type='hidden' name='code' value='{$card->code}'><input type='submit' value='Betalt' id='knapbetalt'> </form>\n").
         "  </div>\n".
         "<body>\n".
         "</html>\n");
