@@ -84,13 +84,6 @@ class Card {
 
   // Check that code is a 10 digit number
   public function validCode() {
-    print("Code: {$this->code}\n");
-    if (preg_match("/^\d{6,12}$/",trim($this->code)))
-      print("<p>Code OK\n");
-    else
-      print("<p>CODE WRONG\n");
-    die();
-
     return(preg_match("/^\d{6,12}$/",trim($this->code)));
   }
 

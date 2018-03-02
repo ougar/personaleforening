@@ -30,6 +30,7 @@ if (@$_SESSION["card"]) {
     $edit=0;
 }
 
+$header->add_javascript("member.js");
 $header->display();
 
 if (!$cardknown)          cardform($card,"Gem nyt kort");
@@ -66,6 +67,10 @@ function cardform($card, $title) {
 function cardinfo($card) {
   if ($card->member) $class='member'; else $class='notmember';
   print("<body>\n".
+        "  <div id='scandiv'>\n".
+        "    <form method='POST' action='checkmember.php'> <input type='hidden' name='scan' value='1'> <input id='codeinput' name='code' autofocus='autofocus'> </input> </form>\n".
+        "  </div>\n".
+        "  <p>\n".
         "  <div id='infodiv' class='$class'>\n".
         "    <h2> Kortoplysninger </h2>\n".
         "    <span> Kort ID  </span> {$card->code} <br>\n".
@@ -74,10 +79,6 @@ function cardinfo($card) {
         "    <span> Medlem   </span> ".($card->member?"Ja":"Nej")." <br>\n".
         "    <form action='index.php'> <input type='submit' value='OK'> </form>\n".
         "    <form action='checkmember.php' method='POST'> <input type='hidden' name='edit' value='1'><input type='hidden' name='code' value='{$card->code}'><input type='submit' value='Edit'> </form>\n".
-        "  </div>\n".
-        "  <p>\n".
-        "  <div id='scandiv'>\n".
-        "    <form method='POST' action='checkmember.php'> <input type='hidden' name='scan' value='1'> <input id='codeinput' name='code' autofocus='autofocus'> </input> </form>\n".
         "  </div>\n".
         "<body>\n".
         "</html>\n");
