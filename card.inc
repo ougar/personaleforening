@@ -32,7 +32,7 @@ class Card {
   }
 
   private function set_image() {
-    $name = "img/w{$this->wnr}.jpg";
+    $name = sprintf("img/w%05d.jpg",$this->wnr);
     if (file_exists($name)) $this->thumbnail=$name;
   }
 

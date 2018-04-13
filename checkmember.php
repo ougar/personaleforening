@@ -24,7 +24,8 @@ if (@$_SESSION["card"]) {
     $cardknown=$card->getFromWnr($code); 
   } else if (preg_match("/^\d{6-12}$/",$code)) {
     $cardknown=$card->getFromCode($code);
-  } else {
+  }
+  if (!$cardknown){
     $_SESSION["error"]="Invalid card ID";
     header("Location: index.php");
   }
