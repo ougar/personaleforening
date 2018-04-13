@@ -54,7 +54,7 @@ form {
 #infodiv {
   padding: 10px;
   display: inline-block;
-  width: 400px;
+  width: 502px;
   font-size: 130%;
 }
 
@@ -69,9 +69,16 @@ form {
 .notmember {
   border: 10px solid red;
 }
+.external {
+  border: 10px solid yellow;
+}
 
 #infodiv input[type=submit] {
   font-size: 150%;
+}
+
+.thumbnail {
+  width: 128px;
 }
 
 #searchfield {

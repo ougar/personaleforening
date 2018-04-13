@@ -15,14 +15,20 @@ if (@$_SESSION["card"]) {
   $code=trim($get->add("code",null,""));
   // If nothing was recieved, just go to index page
   if ($code=="") header("Location: index.php");
-  // Check number format
-  if (!preg_match("/^\d{6,12}$/",$code)) {
+
+  $error="";
+  $card=new Card();
+  // Check recieved input format
+  // If it looks like a wnr, use that
+  if (preg_match("/^[wW]?\d{5}$/",$code)) {
+    $cardknown=$card->getFromWnr($code); 
+  } else if (preg_match("/^\d{6-12}$/",$code)) {
+    $cardknown=$card->getFromCode($code);
+  } else {
     $_SESSION["error"]="Invalid card ID";
     header("Location: index.php");
   }
-  $error="";
-  $card=new Card();
-  $cardknown=$card->getFromCode($code);
+
   if ($cardknown && $get->add("scan",null,"")) $card->scanned();
   if ($get->add("edit",null,""))
     $edit=1;
@@ -66,6 +72,7 @@ function cardform($card, $title) {
 
 function cardinfo($card) {
   if ($card->member) $class='member'; else $class='notmember';
+  if (!$card->obgpers) $class='external';
   print("<body>\n".
         "  <div id='scandiv'>\n".
         "    <form method='POST' action='checkmember.php'> <input type='hidden' name='scan' value='1'> <input id='codeinput' name='code' autofocus='autofocus'> </input> </form>\n".
@@ -73,10 +80,16 @@ function cardinfo($card) {
         "  <p>\n".
         "  <div id='infodiv' class='$class'>\n".
         "    <h2> Kortoplysninger </h2>\n".
-        "    <span> Kort ID  </span> {$card->code} <br>\n".
-        "    <span> W-nummer </span> {$card->wnr} <br>\n".
-        "    <span> Navn     </span> {$card->name} <br>\n".
-        "    <span> Medlem   </span> ".($card->member?"Ja":"Nej")." <br>\n".
+        "    <div id='textinfo'>\n".
+        "      <span> Kort ID  </span> {$card->code} <br>\n".
+        "      <span> W-nummer </span> {$card->wnr} <br>\n".
+        "      <span> Navn     </span> {$card->name} <br>\n".
+        "      <span> Lokation </span> {$card->lokation} <br>\n".
+        "      <span> Medlem   </span> ".($card->member?"Ja":"Nej")." <br>\n".
+        "    </div>\n".
+        "    <div id='thumbinfo'>\n".
+        ($card->thumbnail ? "<img class='thumbnail' src='{$card->thumbnail}'>\n" : "").
+        "    </div>\n".
         "    <form action='index.php'> <input type='submit' value='OK'> </form>\n".
         "    <form action='checkmember.php' method='POST'> <input type='hidden' name='edit' value='1'><input type='hidden' name='code' value='{$card->code}'><input type='submit' value='Edit'> </form>\n".
         ($card->member?"":"    <form action='betalt.php' method='POST'> <input type='hidden' name='code' value='{$card->code}'><input type='submit' value='Betalt' id='knapbetalt'> </form>\n").

@@ -7,32 +7,53 @@ class Card {
   public $wnr;
   public $name;
   public $member;
+  public $lokation;
+  public $obgpers=false;
+  public $thumbnail=null;
   private $table="skatcards_all";
 
   public function __construct() {
   }
 
   public function getFromID($id) {
-    $this->id=$id;
-    $res=Database::get_handle()->kquery(sprintf("select * from {$this->table} where id=%d and enabled",$id));
-    if (!$data=$res->fetch_assoc()) return(false);
-    $this->id=$data["id"];
-    $this->code=$data["code"];
-    $this->name=$data["name"];
-    $this->member=$data["member"];
-    return(true);
+    $res=Database::get_handle()->kquery(sprintf("select * from {$this->table} where id='%d' and enabled",$id));
+    return($this->populate($res));
   }
 
   public function getFromCode($code) {
-    $this->code=$code;
-    $res=Database::get_handle()->kquery(sprintf("select * from {$this->table} where code=%s and enabled",$code));
+    $res=Database::get_handle()->kquery(sprintf("select * from {$this->table} where code='%s' and enabled",$code));
+    return($this->populate($res));
+  }
+
+  public function getFromWnr($wnr) {
+    if ($wnr[0]=="w" or $wnr[0]=="W") $wnr=substr($wnr,1);
+    $res=Database::get_handle()->kquery(sprintf("select * from {$this->table} where wnr='%s' and enabled",$wnr));
+    return($this->populate($res));
+  }
+
+  private function set_image() {
+    $name = "img/w{$this->wnr}.jpg";
+    if (file_exists($name)) $this->thumbnail=$name;
+  }
+
+  private function populate($res) {
     if (!$data=$res->fetch_assoc()) return(false);
     $this->id=$data["id"];
-    $this->code=$data["code"];
     $this->wnr=$data["wnr"];
+    $this->code=$data["code"];
     $this->name=$data["name"];
     $this->member=$data["member"];
+    $this->lokation=$data["lokation"];
+    $this->set_lokation();
+    $this->set_image();
     return(true);
+  }
+
+  private function set_lokation() {
+    if (preg_match("/Havnehol/",$this->lokation) or
+        preg_match("/Kalvebod/",$this->lokation) or
+        preg_match("/Præstøga/",$this->lokation) or
+        preg_match("/Østbaneg/",$this->lokation)) $this->obgpers=true;
   }
 
   public function update() {
