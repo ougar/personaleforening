@@ -22,7 +22,7 @@ if (@$_SESSION["card"]) {
   // If it looks like a wnr, use that
   if (preg_match("/^[wW]?\d{5}$/",$code)) {
     $cardknown=$card->getFromWnr($code); 
-  } else if (preg_match("/^\d{6-12}$/",$code)) {
+  } else if (preg_match("/^\d{6,12}$/",$code)) {
     $cardknown=$card->getFromCode($code);
   }
   if (!$cardknown){
