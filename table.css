@@ -17,6 +17,9 @@ th {
   color: #fff;
   text-align: left;
 }
+th a:visited, th a {
+  color: #fff;
+}
 tr:first-child th:first-child {
   border-top-left-radius: 6px;
 }

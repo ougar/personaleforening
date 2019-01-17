@@ -10,7 +10,7 @@ class Card {
   public $lokation;
   public $obgpers=false;
   public $thumbnail=null;
-  private $table="skatcards_all";
+  private $table="skat_personale";
 
   public function __construct() {
   }

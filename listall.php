@@ -1,7 +1,7 @@
 <?php
 require("setup.inc");
 
-$data=$dbh->kquery("select *,if(member,'Ja','Nej') as medlem from skatcards_all where enabled order by name");
+$data=$dbh->kquery("select *,if(member,'Ja','Nej') as medlem from skat_personale where enabled='yes' order by name");
 
 $header->display();
 print("<body>\n".
