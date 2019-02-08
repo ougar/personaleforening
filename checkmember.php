@@ -22,11 +22,17 @@ if (@$_SESSION["card"]) {
   // If it looks like a wnr, use that
   if (preg_match("/^[wW]?\d{5}$/",$code)) {
     $cardknown=$card->getFromWnr($code); 
+    if (!$cardknown) $_SESSION["error"]="No active employee with this w-nr was found";
   } else if (preg_match("/^\d{6,12}$/",$code)) {
     $cardknown=$card->getFromCode($code);
+    if (!$cardknown) $_SESSION["error"]="Card was not found in database";
   }
+  else {
+    $cardknown=0;
+    $_SESSION["error"]="Invalid input (cardnumber or wnr expected)";
+  }
+
   if (!$cardknown){
-    $_SESSION["error"]="Invalid card ID";
     header("Location: index.php");
   }
 
