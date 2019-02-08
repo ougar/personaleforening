@@ -33,6 +33,11 @@ if (@$_SESSION["card"]) {
   }
 
   if (!$cardknown){
+    # Save errornous card code
+    $filename=dirname($_SERVER["SCRIPT_FILENAME"])."/log/scan_errors.log";
+    $stamp=date("Ymd His");
+    file_put_contents($filename,$stamp." - ".$code."\n",FILE_APPEND);
+    $_SESSION["error"]="Wrote: $code to $filename";
     header("Location: index.php");
   }
 
