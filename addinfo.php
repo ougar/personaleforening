@@ -2,8 +2,6 @@
 
 require("setup.inc");
 
-need_admin();
-
 $_SESSION["info"]="";
 $_SESSION["error"]="";
 

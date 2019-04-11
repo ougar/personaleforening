@@ -2,8 +2,6 @@
 
 require("setup.inc");
 
-need_admin();
-
 $id=$get->add("id",null,"");
 
 // If no ID recieved. Go to start page
@@ -22,6 +20,6 @@ if (!$knowncard) {
 }
 
 $card->delete();
-header("Location: listall.php");
+header("Location: showall.php");
 
 ?>

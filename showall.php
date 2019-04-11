@@ -2,12 +2,17 @@
 require("setup.inc");
 
 $data=$dbh->kquery("select *,if(member,'Ja','Nej') as medlem from skat_personale where enabled order by name");
+$antal=$data->num_rows;
 
+$header->add_css("http://ougar.dk/javascript/sortable-tables.min.css");
+$header->add_javascript("http://ougar.dk/javascript/sortable-tables.min.js");
 $header->display();
 print("<body>\n".
       "<input type='text' id='searchfield' onkeyup='search()' placeholder='Søg... (deaktiveret)'>\n".
       "<p>\n".
-      "<table>\n".
+      "I alt $antal aktive ansatte i hele organisationen\n".
+      "<p>\n".
+      "<table class='sortable-table'>\n".
       "  <thead> <tr> <th> W-nummer <th> Navn <th> Medlem <th> Oprettet <th> </thead>\n".
       "  <tbody>\n");
       while ($row=$data->fetch_assoc()) {

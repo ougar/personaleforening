@@ -1,8 +1,6 @@
 <?php
 require("setup.inc");
 
-need_admin();
-
 $header->add_javascript("member.js");
 $header->display();
 
@@ -20,7 +18,7 @@ else        $info="<div class='info'>$info</div>";
   <div id='scandiv'>
     Scan kort<br>
     <form method='POST' action="checkmember.php"> <input type='hidden' name='scan' value='1'> <input id='codeinput' name='code' placeholder='ready...' autofocus='autofocus'> </input> </form>
-    <p><span> <a href='showmembers.php'>Vis alle medlemmer</a> </span> &nbsp; &nbsp; <span> <a href='listall.php'>Vis alle ansatte (MANGE)</a> </span>
+    <p><span> <a href='showmembers.php'>Vis alle medlemmer</a> </span> &nbsp; &nbsp; <span> <a href='showall.php'>Vis alle ansatte (MANGE)</a> </span>
     <?php echo $info?>
   </div>
 </body>

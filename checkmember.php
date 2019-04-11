@@ -1,8 +1,6 @@
 <?php
 require("setup.inc");
 
-need_admin();
-
 // If saved card exists, check that.
 if (@$_SESSION["card"]) {
   $card=$_SESSION["card"];

@@ -49,6 +49,8 @@ function gologin() {
   die();
 }
 
+need_admin();
+
 function has_error() {
   return(array_key_exists("error",$_SESSION) && $_SESSION["error"]);
 }

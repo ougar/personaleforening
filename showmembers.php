@@ -3,7 +3,7 @@ require("setup.inc");
 
 $data=$dbh->kquery("select *,if(member,'Ja','Nej') as medlem from skat_personale where enabled and member order by wnr");
 
-$antal=$dbh->get_single_value("select count(*) from skat_personale where enabled and member");
+$antal=$data->num_rows;
 
 $header->add_css("http://ougar.dk/javascript/sortable-tables.min.css");
 $header->add_javascript("http://ougar.dk/javascript/sortable-tables.min.js");

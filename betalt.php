@@ -1,8 +1,6 @@
 <?php
 require("setup.inc");
 
-need_admin();
-
 // Get card code from POST/GET 
 $code=trim($get->add("code",null,""));
 // If nothing was recieved, just go to index page
